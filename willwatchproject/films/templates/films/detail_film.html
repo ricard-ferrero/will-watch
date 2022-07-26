@@ -1,0 +1,21 @@
+<h1>Detail Film</h1>
+
+<h3>Title</h3>
+<p>{{film.title}}</p>
+
+{% if film.year %}
+<h3>Year</h3>
+<p>{{film.year}}</p>
+{% endif %}
+
+{% if film.description %}
+<h3>Description</h3>
+<p>{{film.description}}</p>
+{% endif %}
+
+<h3>Watched</h3>
+{% if film.watched %}
+	<p>Done!</p>
+{% else %}
+	<p>Not yet</p>
+{% endif %}

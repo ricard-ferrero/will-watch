@@ -1,0 +1,15 @@
+<h1>List Films</h1>
+
+<h2>Will Watch</h2>
+<ul>
+{% for film in will_watch_film_list %}
+	<li><a href="{% url 'films:detail' film.id %}">{{film.title}}</a></li>
+{% endfor %}
+</ul>
+
+<h2>Watched</h2>
+<ul>
+{% for film in watched_film_list %}
+	<li><a href="{% url 'films:detail' film.id %}">{{film.title}}</a></li>
+{% endfor %}
+</ul>
