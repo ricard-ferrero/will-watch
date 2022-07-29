@@ -1,21 +1,44 @@
 <h1>Detail Film</h1>
 
-<h3>Title</h3>
-<p>{{film.title}}</p>
+<form action="" method="post">
+	{% csrf_token %}
+	<input type="hidden" name="id" value="{{ film.id }}">
+	
+	<button name="call-to" value="delete">Delete</button>
+	<button name="call-to" value="edit">Edit</button>
+	<button name="call-to" value="cancel">Cancel</button>
 
-{% if film.year %}
-<h3>Year</h3>
-<p>{{film.year}}</p>
-{% endif %}
 
-{% if film.description %}
-<h3>Description</h3>
-<p>{{film.description}}</p>
-{% endif %}
+	<h3>Title</h3>
+	<p>{{ film.title }}</p>
+	<input type="text" name="title" value="{{ film.title }}">
 
-<h3>Watched</h3>
-{% if film.watched %}
-	<p>Done!</p>
-{% else %}
-	<p>Not yet</p>
-{% endif %}
+	{% if film.year %}
+	<h3>Year</h3>
+	<p>{{ film.year }}</p>
+	{% endif %}
+	<input type="number" name="year" value="{{ film.year }}">
+
+	{% if film.description %}
+	<h3>Description</h3>
+	<p>{{ film.description }}</p>
+	<textarea name="description" >{{ film.description }}</textarea>
+	{% else %}
+	<textarea name="description" ></textarea>
+	{% endif %}
+
+	<h3>Watched</h3>
+	{% if film.watched %}
+		<p>Done!</p>
+	{% else %}
+		<p>Not yet</p>
+	{% endif %}
+	<input type="hidden" name="watched" value="{{ film.watched }}">
+
+
+	<button name="call-to" value="delete">Delete</button>
+	<button name="call-to" value="edit">Edit</button>
+	<button name="call-to" value="cancel">Cancel</button>
+
+
+</form>
