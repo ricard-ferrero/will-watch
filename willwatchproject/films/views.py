@@ -30,7 +30,9 @@ def list_films(request):
 def detail_film(request, film_id):
 	if request.method == 'GET':
 		film = get_object_or_404(Film, pk=film_id)
-		return render(request, 'films/detail_film.html', {'film': film})
+		genres = film.genre_set.all()
+		return render(request, 'films/detail_film.html', {'film': film, 'genres': genres})
+	
 	elif request.method == 'POST':
 		if request.POST['call-to'] == 'delete':
 			return delete_film(request)
@@ -57,18 +59,21 @@ def new_film(request):
 def create_film(request):
 	film = Film(title=request.POST['title'])
 	if request.POST['year']:
-		film(year=request.POST['year'])
+		film.year = request.POST['year']
 	if request.POST['description']:
-		film(description=request.POST['description'])
+		film.description = request.POST['description']
 	film.save()
 	genres_list = request.POST.getlist('genre')
 	for i in genres_list:
 		film.genre_set.add(i)
-	print(film.genre_set.all())
 	return HttpResponseRedirect(reverse('films:detail', args=(film.id,)))
 
 
 def edit_film(request):
+	"""
+	The 'request' is a POST with all the information of the film object:
+	not only the data to be changed, the data preserved as well.
+	"""
 	film = get_object_or_404(Film, pk=request.POST['id'])
 	film.title = request.POST['title']
 	if request.POST['year'] != '' and request.POST['year'] != None:

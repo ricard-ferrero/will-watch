@@ -13,6 +13,13 @@
 	<p>{{ film.title }}</p>
 	<input type="text" name="title" value="{{ film.title }}">
 
+	<h3>Genre</h3>
+	<ul>
+	{% for genre in genres %}
+		<li>{{ genre }}</li>
+	{% endfor %}
+	</ul>
+
 	{% if film.year %}
 	<h3>Year</h3>
 	<p>{{ film.year }}</p>
