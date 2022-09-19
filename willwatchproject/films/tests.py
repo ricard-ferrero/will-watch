@@ -220,7 +220,7 @@ class DetailFilmViewTests(TestCase):
 
 	def test_detail_a_film_with_a_genre(self):
 		"""
-		Create two diferent genres, but create too a film with only one genre.
+		Create two diferent genres, but create to a film with only one genre.
 		It's only rendered the genre of the film when it's detailed.
 		"""
 		terror_film = Film.objects.create(title='film')

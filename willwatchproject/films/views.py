@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.views.generic.list import ListView
+from django.views.generic import DetailView
+
 from .models import Film
 from genres.models import Genre
 
@@ -10,42 +13,55 @@ from datetime import date
 
 def my_films(request, film_id=0):
 	if film_id > 0:
-		return detail_film(request, film_id)
+		if request.method == 'POST':
+			return post_detail_film(request, film_id)
+		return FilmDetailView.as_view()(request, pk=film_id)
 	else:
-		return list_films(request)
+		return FilmsListView.as_view()(request)
 
 
-def list_films(request):
-	will_watch_film_list = Film.objects.order_by('title').filter(watched=False)
-	watched_film_list = Film.objects.order_by('title').filter(watched=True)
-	genres_list = Genre.objects.order_by('genre_name')
-	context = {
-		'will_watch_film_list': will_watch_film_list,
-		'watched_film_list': watched_film_list,
-		'genres_list': genres_list
-	}
-	return render(request, 'films/list_films.html', context)
+class FilmsListView(ListView):
+	template_name = 'films/list_films.html'
+	context_object_name = 'will_watch_film_list'
+	model = Film
+
+	def get_queryset(self):
+		return Film.objects.order_by('title').filter(watched=False)
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context.update({
+			'watched_film_list': Film.objects.order_by('title').filter(watched=True),
+			'genres_list': Genre.objects.order_by('genre_name')
+			})
+		return context
 
 
-def detail_film(request, film_id):
-	if request.method == 'GET':
-		film = get_object_or_404(Film, pk=film_id)
-		genres = film.genre_set.all()
-		return render(request, 'films/detail_film.html', {'film': film, 'genres': genres})
-	
-	elif request.method == 'POST':
-		if request.POST['call-to'] == 'delete':
-			return delete_film(request)
-		elif request.POST['call-to'] == 'edit':
-			return edit_film(request)
-		else:
-			return HttpResponseRedirect(reverse('films:list'))
+class FilmDetailView(DetailView):
+	model = Film
+	template_name = 'films/detail_film.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context.update({
+			'genres': self.object.genre_set.all()
+			})
+		return context
+
+
+def post_detail_film(request, film_id):
+	if request.POST['call-to'] == 'delete':
+		return delete_film(request)
+	elif request.POST['call-to'] == 'edit':
+		return edit_film(request)
+	else:
+		return HttpResponseRedirect(reverse('films:list'))
 
 
 def random_film(request):
 	film_list = Film.objects.filter(watched=False)
 	film_id = choice(film_list).id
-	return detail_film(request, film_id)
+	return FilmDetailView.as_view()(request, pk=film_id)
 
 
 def new_film(request):
