@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.views.generic.list import ListView
+
 from django.views.generic import DetailView
+from django.views.generic.list import ListView
 
 from .models import Film
 from genres.models import Genre
@@ -47,6 +48,14 @@ class FilmDetailView(DetailView):
 			'genres': self.object.genre_set.all()
 			})
 		return context
+
+
+"""
+The rest of the code will be updated to Class Based Views,
+then I need to research more about that.
+For this moment I prefere to keep it functional and
+work on the rest of the project :)
+"""
 
 
 def post_detail_film(request, film_id):
