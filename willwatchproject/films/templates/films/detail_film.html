@@ -8,40 +8,61 @@
 	<button name="call-to" value="edit">Edit</button>
 	<button name="call-to" value="cancel">Cancel</button>
 
-
-	<h3>Title</h3>
+<fieldset>
+	<legend>
+		<h3>Title</h3>
+	</legend>
 	<p>{{ film.title }}</p>
 	<input type="text" name="title" value="{{ film.title }}">
+</fieldset>
 
-	<h3>Genre</h3>
+<fieldset>
+	<legend>
+		<h3>Genre</h3>
+	</legend>
 	<ul>
 	{% for genre in genres %}
 		<li>{{ genre }}</li>
 	{% endfor %}
 	</ul>
+</fieldset>
 
+<fieldset>
+	<legend>
+		<h3>Year</h3>
+	</legend>
 	{% if film.year %}
-	<h3>Year</h3>
 	<p>{{ film.year }}</p>
 	{% endif %}
 	<input type="number" name="year" value="{{ film.year }}">
+</fieldset>
 
+<fieldset>
+	<legend>
+		<h3>Description</h3>
+	</legend>
 	{% if film.description %}
-	<h3>Description</h3>
 	<p>{{ film.description }}</p>
 	<textarea name="description" >{{ film.description }}</textarea>
 	{% else %}
 	<textarea name="description" ></textarea>
 	{% endif %}
+</fieldset>
 
-	<h3>Watched</h3>
+<fieldset>
+	<legend>
+		<h3>Watched</h3>
+	</legend>
 	{% if film.watched %}
 		<p>Done!</p>
 	{% else %}
-		<p>Not yet</p>
+		<p>Not yet<p>
 	{% endif %}
-	<input type="hidden" name="watched" value="{{ film.watched }}">
-
+	<input type="radio" id="done" name="watched" value="True" {% if film.watched %}checked{% endif %}>
+		<label for="done">Done!</label>
+	<input type="radio" id="not-yet" name="watched" value="False" {% if not film.watched %}checked{% endif %}>
+		<label for="not-yet">Not yet</label>
+</fieldset>
 
 	<button name="call-to" value="delete">Delete</button>
 	<button name="call-to" value="edit">Edit</button>
