@@ -6,7 +6,7 @@
 	<br>
 	<label>Genre: </label>
 		{% for genre in genres_list %}
-			<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ foorloop.counter }}"><label for="genre{{ foorloop.counter }}">{{ genre.genre_name }}</label>
+			<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}"><label for="genre{{ forloop.counter }}">{{ genre.genre_name }}</label>
 		{% endfor %}
 	<br>
 	<label for="year">Year: </label><input id="year" type="number" name="year" min="1900" max="2050">

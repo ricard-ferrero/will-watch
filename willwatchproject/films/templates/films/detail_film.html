@@ -25,6 +25,9 @@
 		<li>{{ genre }}</li>
 	{% endfor %}
 	</ul>
+	{% for genre in genres_list %}
+		<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}" {% if genre in genres %}checked{% endif %}><label for="genre{{ forloop.counter }}">{{ genre.genre_name }}</label>
+	{% endfor %}
 </fieldset>
 
 <fieldset>

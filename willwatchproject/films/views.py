@@ -45,7 +45,8 @@ class FilmDetailView(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context.update({
-			'genres': self.object.genre_set.all()
+			'genres': self.object.genre_set.all(),
+			'genres_list': Genre.objects.order_by('genre_name'),
 			})
 		return context
 
@@ -110,6 +111,10 @@ def edit_film(request):
 	else:
 		film.description = None
 	film.watched = request.POST['watched']
+	genres_list = request.POST.getlist('genre')
+	film.genre_set.clear()
+	for i in genres_list:
+		film.genre_set.add(i)
 	film.save()
 	return HttpResponseRedirect(reverse('films:detail', args=(film.id,)))
 	
