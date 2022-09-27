@@ -1,4 +1,5 @@
-from django.shortcuts import render
+#from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic.edit import CreateView
 from .models import Genre
 

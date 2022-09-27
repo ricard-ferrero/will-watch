@@ -1,5 +1,6 @@
 from django.db import models
 from films.models import Film
+from django.urls import reverse
 
 
 class Genre(models.Model):
@@ -12,3 +13,6 @@ class Genre(models.Model):
 
 	def __str__(self):
 		return self.genre_name
+
+	def get_absolute_url(self):
+		return reverse('films:list')
