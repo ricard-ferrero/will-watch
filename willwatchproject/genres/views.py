@@ -3,6 +3,7 @@ from django.urls import reverse
 
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from .models import Genre
 
@@ -20,3 +21,9 @@ class GenreListView(ListView):
 
 	def get_queryset(self):
 		return Genre.objects.order_by('genre_name')
+
+
+class GenreDetailView(DetailView):
+	model = Genre
+	template_name = 'genres/detail_genre.html'
+	
