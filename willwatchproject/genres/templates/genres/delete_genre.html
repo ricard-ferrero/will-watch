@@ -1,0 +1,8 @@
+<h1>Delete Genre</h1>
+
+<form method="post">
+	{% csrf_token %}
+	<p>Are you sure you want to delete "{{ object }}"?</p>
+	{{ form }}
+	<input type="submit" name="Confirm">
+</form>

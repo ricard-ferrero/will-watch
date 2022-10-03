@@ -1,7 +1,7 @@
 #from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy
 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
@@ -26,4 +26,22 @@ class GenreListView(ListView):
 class GenreDetailView(DetailView):
 	model = Genre
 	template_name = 'genres/detail_genre.html'
-	
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context.update({
+			'films': self.object.films.all().order_by('title'),
+			})
+		return context
+
+
+class GenreUpdateView(UpdateView):
+	model = Genre
+	fields = ['genre_name']
+	template_name = 'genres/update_genre.html'
+
+
+class GenreDeleteView(DeleteView):
+	model = Genre
+	template_name = 'genres/delete_genre.html'
+	success_url = reverse_lazy('genres:list')

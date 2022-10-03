@@ -1,1 +1,7 @@
 <h1>{{ genre.genre_name }}</h1>
+
+<ul>
+	{% for film in films %}
+	<li><a href="{% url 'films:detail' film.id %}">{{ film.title }}</a></li>
+	{% endfor %}
+</ul>
