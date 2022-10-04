@@ -1,3 +1,11 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}My Films{% endblock %}
+
+{% block active-genres %}active{% endblock %}
+{% block aria-genres %}aria-current="page"{% endblock %}
+
+{% block content %}
 <h1>Genres</h1>
 
 <ul>
@@ -5,3 +13,4 @@
 	<li><a href="{% url 'genres:detail' genre.id %}">{{ genre.genre_name }}</a></li>
 	{% endfor %}
 </ul>
+{% endblock %}

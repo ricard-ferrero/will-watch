@@ -1,3 +1,11 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}My Films{% endblock %}
+
+{% block active-films %}active{% endblock %}
+{% block aria-films %}aria-current="page"{% endblock %}
+
+{% block content %}
 <h1>List Films</h1>
 
 <h3>Genres</h3>
@@ -20,3 +28,4 @@
 	<li><a href="{% url 'films:detail' film.id %}">{{film.title}}</a></li>
 {% endfor %}
 </ul>
+{% endblock %}
