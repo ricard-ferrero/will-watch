@@ -6,26 +6,26 @@
 {% block aria-films %}aria-current="page"{% endblock %}
 
 {% block content %}
-<h1>List Films</h1>
+<h1>My Films</h1>
 
 <h3>Genres</h3>
 <ul>
 {% for genre in genres_list %}
-	<li>{{genre.genre_name|capfirst}}</li>
+	<li><a href="{% url 'genres:detail' genre.id %}">{{genre.genre_name|capfirst}}</a></li>
 {% endfor %}
 </ul>
 
 <h2>Will Watch</h2>
 <ul>
 {% for film in will_watch_film_list %}
-	<li><a href="{% url 'films:detail' film.id %}">{{film.title}}</a></li>
+	<li><a href="{% url 'films:detail' film.id %}">{{film.title|capfirst}}</a></li>
 {% endfor %}
 </ul>
 
 <h2>Watched</h2>
 <ul>
 {% for film in watched_film_list %}
-	<li><a href="{% url 'films:detail' film.id %}">{{film.title}}</a></li>
+	<li><a href="{% url 'films:detail' film.id %}">{{film.title|capfirst}}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

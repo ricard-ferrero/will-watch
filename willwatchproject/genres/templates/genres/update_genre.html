@@ -1,7 +1,16 @@
-<h1>Update Genre</h1>
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}Edit "{{ genre.genre_name|capfirst }}"{% endblock %}
+
+{% block active-genres %}active{% endblock %}
+{% block aria-genres %}aria-current="page"{% endblock %}
+
+{% block content %}
+<h1>Edit "{{ genre.genre_name|capfirst }}"</h1>
 
 <form method="post">
 	{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Update">
+    <input type="submit" value="Edit">
 </form>
+{% endblock %}

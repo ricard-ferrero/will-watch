@@ -1,5 +1,15 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}New Genre{% endblock %}
+
+{% block active-genres %}active{% endblock %}
+{% block aria-genres %}aria-current="page"{% endblock %}
+
+{% block content %}
+<h1>New Genre</h1>
 <form method="post">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<input type="submit" name="Create">
 </form>
+{% endblock %}

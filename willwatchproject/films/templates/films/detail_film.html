@@ -1,4 +1,12 @@
-<h1>Detail Film</h1>
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}{{ film.title|capfirst }}{% endblock %}
+
+{% block active-films %}active{% endblock %}
+{% block aria-films %}aria-current="page"{% endblock %}
+
+{% block content %}
+<h1>{{ film.title|capfirst }}</h1>
 
 <form action="" method="post">
 	{% csrf_token %}
@@ -22,11 +30,11 @@
 	</legend>
 	<ul>
 	{% for genre in genres %}
-		<li>{{ genre }}</li>
+		<li>{{ genre_name|capfirst }}</li>
 	{% endfor %}
 	</ul>
 	{% for genre in genres_list %}
-		<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}" {% if genre in genres %}checked{% endif %}><label for="genre{{ forloop.counter }}">{{ genre.genre_name }}</label>
+		<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}" {% if genre in genres %}checked{% endif %}><label for="genre{{ forloop.counter }}">{{ genre.genre_name|capfirst }}</label>
 	{% endfor %}
 </fieldset>
 
@@ -73,3 +81,4 @@
 
 
 </form>
+{% endblock %}

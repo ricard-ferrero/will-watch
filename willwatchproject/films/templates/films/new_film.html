@@ -1,3 +1,11 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}New Film{% endblock %}
+
+{% block active-films %}active{% endblock %}
+{% block aria-films %}aria-current="page"{% endblock %}
+
+{% block content %}
 <h1>New Film</h1>
 
 <form action="" method="post" accept-charset="utf-8">
@@ -6,7 +14,7 @@
 	<br>
 	<label>Genre: </label>
 		{% for genre in genres_list %}
-			<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}"><label for="genre{{ forloop.counter }}">{{ genre.genre_name }}</label>
+			<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}"><label for="genre{{ forloop.counter }}">{{ genre.genre_name|capfirst }}</label>
 		{% endfor %}
 	<br>
 	<label for="year">Year: </label><input id="year" type="number" name="year" min="1900" max="2050">
@@ -15,3 +23,4 @@
 	<br>
 	<input type="submit">
 </form>
+{% endblock %}
