@@ -6,78 +6,55 @@
 {% block aria-films %}aria-current="page"{% endblock %}
 
 {% block content %}
-<h1>{{ film.title|capfirst }}</h1>
+<h1>"{{ film.title|capfirst }}"</h1>
 
 <form action="" method="post">
 	{% csrf_token %}
 	<input type="hidden" name="id" value="{{ film.id }}">
-	
-	<button name="call-to" value="delete">Delete</button>
-	<button name="call-to" value="edit">Edit</button>
-	<button name="call-to" value="cancel">Cancel</button>
 
-<fieldset>
-	<legend>
-		<h3>Title</h3>
-	</legend>
+<p class="h3">Title <button type="button" class="btn btn-link">Edit</button></p>
+
 	<p>{{ film.title }}</p>
-	<input type="text" name="title" value="{{ film.title }}">
-</fieldset>
+	<input type="text" name="title" value="{{ film.title }}" class="d-none">
 
-<fieldset>
-	<legend>
-		<h3>Genre</h3>
-	</legend>
+
+<p class="h3">Genre <button type="button" class="btn btn-link">Edit</button></p>
+
 	<ul>
 	{% for genre in genres %}
-		<li>{{ genre_name|capfirst }}</li>
+		<li>{{ genre.genre_name|capfirst }}</li>
 	{% endfor %}
 	</ul>
 	{% for genre in genres_list %}
-		<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}" {% if genre in genres %}checked{% endif %}><label for="genre{{ forloop.counter }}">{{ genre.genre_name|capfirst }}</label>
+		<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}" {% if genre in genres %}checked{% endif %} class="d-none"><label for="genre{{ forloop.counter }}" class="d-none">{{ genre.genre_name|capfirst }}</label>
 	{% endfor %}
-</fieldset>
 
-<fieldset>
-	<legend>
-		<h3>Year</h3>
-	</legend>
+
+<p class="h3">Year <button type="button" class="btn btn-link">Edit</button></p>
 	{% if film.year %}
 	<p>{{ film.year }}</p>
 	{% endif %}
-	<input type="number" name="year" value="{{ film.year }}">
-</fieldset>
+	<input type="number" name="year" value="{{ film.year }}" class="d-none">
 
-<fieldset>
-	<legend>
-		<h3>Description</h3>
-	</legend>
+<p class="h3">Description <button type="button" class="btn btn-link">Edit</button></p>
 	{% if film.description %}
 	<p>{{ film.description }}</p>
-	<textarea name="description" >{{ film.description }}</textarea>
+	<textarea name="description" class="d-none">{{ film.description }}</textarea>
 	{% else %}
-	<textarea name="description" ></textarea>
+	<textarea name="description" class="d-none"></textarea>
 	{% endif %}
-</fieldset>
 
-<fieldset>
-	<legend>
-		<h3>Watched</h3>
-	</legend>
-	{% if film.watched %}
-		<p>Done!</p>
-	{% else %}
-		<p>Not yet<p>
-	{% endif %}
+<p class="h3">Watched</p>
 	<input type="radio" id="done" name="watched" value="True" {% if film.watched %}checked{% endif %}>
 		<label for="done">Done!</label>
 	<input type="radio" id="not-yet" name="watched" value="False" {% if not film.watched %}checked{% endif %}>
 		<label for="not-yet">Not yet</label>
-</fieldset>
 
+<div>	
 	<button name="call-to" value="delete">Delete</button>
 	<button name="call-to" value="edit">Edit</button>
 	<button name="call-to" value="cancel">Cancel</button>
+</div>
 
 
 </form>
