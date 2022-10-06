@@ -7,4 +7,5 @@ urlpatterns = [
 	path('myfilms/<int:film_id>/', views.my_films, name='detail'),
 	path('random/', views.random_film, name='random'),
 	path('new/', views.new_film, name='new'),
+	path('edit/<int:pk>/', views.update_film, name='update')
 ]

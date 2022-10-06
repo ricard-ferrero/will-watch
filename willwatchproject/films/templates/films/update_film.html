@@ -1,0 +1,49 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}Edit "{{ film.title|capfirst }}"{% endblock %}
+
+{% block active-films %}active{% endblock %}
+{% block aria-films %}aria-current="page"{% endblock %}
+
+{% block content %}
+<h1>Edit "{{ film.title|capfirst }}"</h1>
+
+<form action="" method="post">
+	{% csrf_token %}
+	<input type="hidden" name="id" value="{{ film.id }}">
+
+<p class="h3">Title</p>
+	<input type="text" name="title" id="title-input" value="{{ film.title }}">
+
+
+<p class="h3">Genre</p>
+	{% for genre in genres_list %}
+		<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}" {% if genre in film.genre_set.all %}checked{% endif %}><label for="genre{{ forloop.counter }}">{{ genre.genre_name|capfirst }}</label>
+	{% endfor %}
+
+
+<p class="h3">Year</p>
+	<input type="number" name="year" value="{{ film.year }}" class="d-none">
+
+<p class="h3">Description</p>
+	{% if film.description %}
+	<textarea name="description">{{ film.description }}</textarea>
+	{% else %}
+	<textarea name="description"></textarea>
+	{% endif %}
+
+<p class="h3">Watched</p>
+	<input type="radio" id="done" name="watched" value="True" {% if film.watched %}checked{% endif %}>
+		<label for="done">Done!</label>
+	<input type="radio" id="not-yet" name="watched" value="False" {% if not film.watched %}checked{% endif %}>
+		<label for="not-yet">Not yet</label>
+
+<div>	
+	<button>Edit</button>
+</div>
+</form>
+<!--
+<button name="call-to" value="cancel">Cancel</button>
+<button name="call-to" value="delete">Delete</button>
+-->
+{% endblock %}

@@ -8,7 +8,7 @@
 {% block content %}
 <h1>My Films</h1>
 
-<h3>Genres</h3>
+<p class="h4">Genres</p>
 <ul>
 {% for genre in genres_list %}
 	<li><a href="{% url 'genres:detail' genre.id %}">{{genre.genre_name|capfirst}}</a></li>
