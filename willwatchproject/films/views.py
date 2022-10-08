@@ -58,7 +58,7 @@ For this moment I prefere to keep it functional and
 work on the rest of the project :)
 """
 
-
+"""
 def post_detail_film(request, film_id):
 	if request.POST['call-to'] == 'delete':
 		return delete_film(request)
@@ -66,7 +66,7 @@ def post_detail_film(request, film_id):
 		return edit_film(request)
 	else:
 		return HttpResponseRedirect(reverse('films:list'))
-
+"""
 
 def random_film(request):
 	film_list = Film.objects.filter(watched=False)
@@ -116,11 +116,11 @@ def edit_film(request):
 	for i in genres_list:
 		film.genre_set.add(i)
 	film.save()
-	return HttpResponseRedirect(reverse('films:detail', args=(film.id,)))
+	return HttpResponseRedirect(reverse('films:list'))
 	
 
-def delete_film(request):
-	film = get_object_or_404(Film, pk=request.POST['id'])
+def delete_film(request, pk):
+	film = get_object_or_404(Film, pk=pk)
 	film.delete()
 	return HttpResponseRedirect(reverse('films:list'))
 
