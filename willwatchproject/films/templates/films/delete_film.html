@@ -1,0 +1,16 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}Remove "{{ film.title|capfirst }}"?{% endblock %}
+
+{% block active-films %}active{% endblock %}
+{% block aria-films %}aria-current="page"{% endblock %}
+
+{% block content %}
+<h1>Are you sure?</h1>
+<p>Do you want to remove <span class="fw-bold">"{{ film.title|capfirst }}"</span> from your list?</p>
+<form method="post">
+	{% csrf_token %}
+	<button type="submit">Remove</button>
+	<a href="{% url 'films:list' %}">Cancel</a>
+</form>
+{% endblock %}

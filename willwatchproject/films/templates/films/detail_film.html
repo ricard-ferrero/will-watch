@@ -29,13 +29,9 @@
 	{% endif %}
 
 
-{% if film.watched %}
-<a href="#">Not watched...</a>
-{% else %}
-<a href="#">Watched!</a>
-{% endif %}
 
-<a href="#">Edit</a>
-<a href="#">Delete</a>
+<a href="{% url 'films:watched' film.id %}">{% if film.watched %}Not watched...{% else %}Watched!{% endif %}</a>
+<a href="{% url 'films:update' film.id %}">Edit</a>
+<a href="{% url 'films:delete' film.id %}">Delete</a>
 
 {% endblock %}

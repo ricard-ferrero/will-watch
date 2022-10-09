@@ -14,22 +14,15 @@
 	<li><a href="{% url 'genres:detail' genre.id %}">{{genre.genre_name|capfirst}}</a></li>
 {% endfor %}
 </ul>
-<!--
-<h2>Will Watch</h2>
-<ul>
-{% for film in will_watch_film_list %}
-	<li><a href="{% url 'films:detail' film.id %}">{{film.title|capfirst}}</a></li>
-{% endfor %}
-</ul>
 
-<h2>Watched</h2>
-<ul>
-{% for film in watched_film_list %}
-	<li><a href="{% url 'films:detail' film.id %}">{{film.title|capfirst}}</a></li>
-{% endfor %}
-</ul>
--->
 <h2>Will Watch</h2>
+<div class="card m-3">
+	<div class="card-body">
+		<p class="card-title h3">
+			<a href="{% url 'films:new' %}"><i class="bi bi-plus-circle"></i>Add a new film!</a>
+		</p>
+	</div>
+</div>
 {% for film in will_watch_film_list %}
 <div class="card m-3">
   <div class="card-body">
@@ -47,8 +40,11 @@
     -->
     <p class="card-text">{% if film.description %}{{ film.description }}{% endif %}</p>
   </div>
+  <!--
+  		Buttons
+  -->
   <div class="card-footer">
-	<a href="#">Whatched!</a>
+	<a href="{% url 'films:watched' film.id %}">Whatched!</a>
 	<a href="{% url 'films:update' film.id %}">Edit</a>
 	<a href="{% url 'films:delete' film.id %}">Remove</a>
   </div>
@@ -73,8 +69,11 @@
     -->
     <p class="card-text">{% if film.description %}{{ film.description }}{% endif %}</p>
   </div>
+  <!--
+  		Buttons
+  -->
   <div class="card-footer">
-	<a href="#">Not watched yet...</a>
+	<a href="{% url 'films:watched' film.id %}">Not watched yet...</a>
 	<a href="{% url 'films:update' film.id %}">Edit</a>
 	<a href="{% url 'films:delete' film.id %}">Remove</a>
   </div>

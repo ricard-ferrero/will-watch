@@ -121,8 +121,11 @@ def edit_film(request):
 
 def delete_film(request, pk):
 	film = get_object_or_404(Film, pk=pk)
-	film.delete()
-	return HttpResponseRedirect(reverse('films:list'))
+	if request.method == 'GET':
+		return render(request, 'films/delete_film.html', {'film': film})
+	if request.method == 'POST':
+		film.delete()
+		return HttpResponseRedirect(reverse('films:list'))
 
 def update_film(request, pk):
 	if request.method == 'GET':
@@ -132,3 +135,9 @@ def update_film(request, pk):
 		return render(request, 'films/update_film.html', {'film': film, 'genres_list': genres_list})
 	if request.method == 'POST':
 		return edit_film(request)
+
+def whatched_film(request, pk):
+	film = get_object_or_404(Film, pk=pk)
+	film.watched = not film.watched
+	film.save()
+	return HttpResponseRedirect(reverse('films:list'))
