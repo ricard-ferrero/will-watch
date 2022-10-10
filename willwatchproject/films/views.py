@@ -70,8 +70,11 @@ def post_detail_film(request, film_id):
 
 def random_film(request):
 	film_list = Film.objects.filter(watched=False)
-	film_id = choice(film_list).id
-	return FilmDetailView.as_view()(request, pk=film_id)
+	if film_list:
+		film_id = choice(film_list).id
+		return FilmDetailView.as_view()(request, pk=film_id)
+	else:
+		return HttpResponseRedirect(reverse('films:list'))
 
 
 def new_film(request):

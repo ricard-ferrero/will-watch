@@ -9,9 +9,69 @@
 <h1>Genre "{{ genre.genre_name|capfirst }}"</h1>
 
 <h2>Related films</h2>
+<!--
 <ul>
 	{% for film in films %}
 	<li><a href="{% url 'films:detail' film.id %}">{{ film.title|capfirst }}</a></li>
 	{% endfor %}
 </ul>
+-->
+{% for film in films %}
+<div class="card m-3">
+  <div class="card-body">
+    <!--
+    	Title and Year
+	-->
+    <p class="card-title h3"><a href="{% url 'films:detail' film.id %}">{{film.title|capfirst}}</a> <span class="fw-lighter">{% if film.year %}{{ film.year }}{% endif %}</span></p>
+    <!--
+    	Genres of the film
+    -->
+    <p class="card-subtitle text-muted">{% for genre in film.genre_set.all %}{{ genre|capfirst }}{% if not forloop.last %},{% endif %}
+    {% endfor %}</p>
+    <!--
+    	Description of the film
+    -->
+    <p class="card-text">{% if film.description %}{{ film.description }}{% endif %}</p>
+  </div>
+  <!--
+  		Buttons
+  -->
+  <div class="card-footer">
+	<a href="{% url 'films:watched' film.id %}">Whatched!</a>
+	<a href="{% url 'films:update' film.id %}">Edit</a>
+	<a href="{% url 'films:delete' film.id %}">Remove</a>
+  </div>
+</div>
+{% endfor %}
+
+{% for film in films_watched %}
+<div class="card m-3">
+  <div class="card-header">
+  	<i class="bi bi-eye"></i> Watched
+  </div>
+  <div class="card-body">
+    <!--
+    	Title and Year
+	-->
+    <p class="card-title h3"><a href="{% url 'films:detail' film.id %}">{{film.title|capfirst}}</a> <span class="fw-lighter">{% if film.year %}{{ film.year }}{% endif %}</span></p>
+    <!--
+    	Genres of the film
+    -->
+    <p class="card-subtitle text-muted">{% for genre in film.genre_set.all %}{{ genre|capfirst }}{% if not forloop.last %},{% endif %}
+    {% endfor %}</p>
+    <!--
+    	Description of the film
+    -->
+    <p class="card-text">{% if film.description %}{{ film.description }}{% endif %}</p>
+  </div>
+  <!--
+  		Buttons
+  -->
+  <div class="card-footer">
+	<a href="{% url 'films:watched' film.id %}">Not watched yet...</a>
+	<a href="{% url 'films:update' film.id %}">Edit</a>
+	<a href="{% url 'films:delete' film.id %}">Remove</a>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

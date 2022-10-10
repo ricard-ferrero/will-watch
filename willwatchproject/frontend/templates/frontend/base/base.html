@@ -26,6 +26,9 @@
 		        <li class="nav-item">
 		          <a class="nav-link {% block active-genres %}{% endblock %}" {% block aria-genres %}{% endblock %} href="{% url 'genres:list' %}">Genres</a>
 		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="{% url 'films:random' %}">Random</a>
+		        </li>
 		    </div>
 		  </div>
 		</nav>
