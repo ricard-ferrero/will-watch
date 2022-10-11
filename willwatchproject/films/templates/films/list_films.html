@@ -19,7 +19,7 @@
 <div class="card m-3">
 	<div class="card-body">
 		<p class="card-title h3">
-			<a href="{% url 'films:new' %}"><i class="bi bi-plus-circle"></i>Add a new film!</a>
+			<a href="{% url 'films:new' %}"><i class="bi bi-plus-circle"></i> Add a new film!</a>
 		</p>
 	</div>
 </div>
@@ -54,6 +54,9 @@
 <h2>Watched</h2>
 {% for film in watched_film_list %}
 <div class="card m-3">
+  <div class="card-header">
+    <i class="bi bi-eye"></i> Watched
+  </div>
   <div class="card-body">
     <!--
     	Title and Year

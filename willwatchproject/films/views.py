@@ -119,7 +119,7 @@ def edit_film(request):
 	for i in genres_list:
 		film.genre_set.add(i)
 	film.save()
-	return HttpResponseRedirect(reverse('films:list'))
+	return HttpResponseRedirect(reverse('films:detail', args=[film.id]))
 	
 
 def delete_film(request, pk):

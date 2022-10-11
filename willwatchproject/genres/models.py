@@ -15,4 +15,4 @@ class Genre(models.Model):
 		return self.genre_name
 
 	def get_absolute_url(self):
-		return reverse('films:list')
+		return reverse('genres:list')

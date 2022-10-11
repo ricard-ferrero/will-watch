@@ -12,4 +12,16 @@
 	{{ form.as_p }}
 	<input type="submit" name="Create">
 </form>
+
+<script type="text/javascript">
+	const all = document.querySelectorAll('form > input')
+	const input = document.getElementById('id_genre_name')
+	const btn = all[1]
+	
+	btn.addEventListener('click', e=>{
+		e.preventDefault()
+		input.value = input.value.toLowerCase()
+		document.querySelector('form').submit()
+	})
+</script>
 {% endblock %}

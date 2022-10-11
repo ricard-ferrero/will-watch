@@ -33,14 +33,6 @@
     -->
     <p class="card-text">{% if film.description %}{{ film.description }}{% endif %}</p>
   </div>
-  <!--
-  		Buttons
-  -->
-  <div class="card-footer">
-	<a href="{% url 'films:watched' film.id %}">Whatched!</a>
-	<a href="{% url 'films:update' film.id %}">Edit</a>
-	<a href="{% url 'films:delete' film.id %}">Remove</a>
-  </div>
 </div>
 {% endfor %}
 
@@ -63,14 +55,6 @@
     	Description of the film
     -->
     <p class="card-text">{% if film.description %}{{ film.description }}{% endif %}</p>
-  </div>
-  <!--
-  		Buttons
-  -->
-  <div class="card-footer">
-	<a href="{% url 'films:watched' film.id %}">Not watched yet...</a>
-	<a href="{% url 'films:update' film.id %}">Edit</a>
-	<a href="{% url 'films:delete' film.id %}">Remove</a>
   </div>
 </div>
 {% endfor %}
