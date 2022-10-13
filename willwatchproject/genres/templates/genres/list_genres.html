@@ -8,10 +8,34 @@
 {% block content %}
 <h1>My Genres</h1>
 
+<!--
 <ul>
 	<li><a href="{% url 'genres:new' %}"><i class="bi bi-plus-circle"></i> Add a new genre!</a></li>
 	{% for genre in genres %}
 	<li><a href="{% url 'genres:detail' genre.id %}">{{ genre.genre_name|capfirst }}</a></li>
 	{% endfor %}
 </ul>
+-->
+
+<div class="card m-3">
+	<div class="card-body">
+		<p class="card-title h3">
+			<a href="{% url 'genres:new' %}"><i class="bi bi-plus-circle"></i> Add a new genre!</a>
+		</p>
+	</div>
+</div>
+{% for genre in genres %}
+<div class="card m-3">
+	<div class="card-body">
+		<p class="card-title h3">
+			<a href="{% url 'genres:detail' genre.id %}">{{ genre.genre_name|capfirst }}</a>
+		</p>
+	</div>
+	<div class="card-footer">
+		<a href="{% url 'genres:update' genre.id %}">Edit</a>
+		<a href="{% url 'genres:delete' genre.id %}">Remove</a>
+	</div>
+</div>
+{% endfor %}
+
 {% endblock %}
