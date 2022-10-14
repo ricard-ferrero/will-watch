@@ -8,10 +8,9 @@
 {% block content %}
 <h1>My Films</h1>
 
-<p class="h4">Genres</p>
-<ul>
+<ul class="list-inline">
 {% for genre in genres_list %}
-	<li><a href="{% url 'genres:detail' genre.id %}">{{genre.genre_name|capfirst}}</a></li>
+	<li class="list-inline-item"><a href="{% url 'genres:detail' genre.id %}">{{genre.genre_name|capfirst}}</a></li>
 {% endfor %}
 </ul>
 
@@ -44,9 +43,9 @@
   		Buttons
   -->
   <div class="card-footer">
-	<a href="{% url 'films:watched' film.id %}">Whatched!</a>
-	<a href="{% url 'films:update' film.id %}">Edit</a>
-	<a href="{% url 'films:delete' film.id %}">Remove</a>
+	<a class="btn btn-success" role="button" href="{% url 'films:watched' film.id %}">Whatched!</a>
+	<a class="btn btn-primary" role="button" href="{% url 'films:update' film.id %}">Edit</a>
+	<a class="btn btn-danger" role="button" href="{% url 'films:delete' film.id %}">Remove</a>
   </div>
 </div>
 {% endfor %}
@@ -76,9 +75,9 @@
   		Buttons
   -->
   <div class="card-footer">
-	<a href="{% url 'films:watched' film.id %}">Not watched yet...</a>
-	<a href="{% url 'films:update' film.id %}">Edit</a>
-	<a href="{% url 'films:delete' film.id %}">Remove</a>
+	<a class="btn btn-secondary" role="button" href="{% url 'films:watched' film.id %}">Not watched yet...</a>
+	<a class="btn btn-primary" role="button" href="{% url 'films:update' film.id %}">Edit</a>
+	<a class="btn btn-danger" role="button" href="{% url 'films:delete' film.id %}">Remove</a>
   </div>
 </div>
 {% endfor %}

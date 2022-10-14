@@ -6,32 +6,38 @@
 {% block aria-films %}aria-current="page"{% endblock %}
 
 {% block content %}
+<div class="card">
+
+<div class="card-body">
 <h1>{{ film.title|capfirst }}</h1>
 
-<p class="h3">Genre</p>
-	<ul>
+<p class="h3 text-muted mb-0">Genre</p>
+	<ul class="list-inline">
 	{% for genre in genres %}
-		<li>{{ genre.genre_name|capfirst }}</li>
+		<li  class="list-inline-item">{{ genre.genre_name|capfirst }}</li>
 	{% endfor %}
 	</ul>
 
-<p class="h3">Year</p>
+<p class="h3 text-muted mb-0">Year</p>
 	<p>{{ film.year }}</p>
 
-<p class="h3">Description</p>
+<p class="h3 text-muted mb-0">Description</p>
 	<p>{{ film.description }}</p>
 
-<p class="h3">Watched</p>
+<p class="h3 text-muted mb-0">Watched</p>
 	{% if film.watched %}
 	<p>Done!</p>
 	{% else %}
 	<p>Not yet</p>
 	{% endif %}
+</div>
 
 
+<div class="card-footer">
+<a class="btn btn-{% if film.watched %}secondary{% else %}success{% endif %}" role="button" href="{% url 'films:watched' film.id %}">{% if film.watched %}Not watched yet...{% else %}Watched!{% endif %}</a>
+<a class="btn btn-primary" role="button" href="{% url 'films:update' film.id %}">Edit</a>
+<a class="btn btn-danger" role="button" href="{% url 'films:delete' film.id %}">Remove</a>
+</div>
 
-<a href="{% url 'films:watched' film.id %}">{% if film.watched %}Not watched...{% else %}Watched!{% endif %}</a>
-<a href="{% url 'films:update' film.id %}">Edit</a>
-<a href="{% url 'films:delete' film.id %}">Delete</a>
-
+</div>
 {% endblock %}
