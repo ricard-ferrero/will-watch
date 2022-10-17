@@ -10,13 +10,16 @@
 <form method="post">
 	{% csrf_token %}
 	{{ form.as_p }}
-	<input type="submit" name="Create">
+
+	<div>
+	<button type="submit" name="Create" class="btn btn-primary">Create genre</button>
+	<a role="button" class="btn btn-secondary" href="{% url 'genres:list' %}">Cancel</a>
+	</div>
 </form>
 
 <script type="text/javascript">
-	const all = document.querySelectorAll('form > input')
+	const btn = document.querySelector('button')
 	const input = document.getElementById('id_genre_name')
-	const btn = all[1]
 	
 	btn.addEventListener('click', e=>{
 		e.preventDefault()

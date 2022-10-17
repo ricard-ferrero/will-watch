@@ -7,15 +7,10 @@
 
 {% block content %}
 <h1>Genre "{{ genre.genre_name|capfirst }}"</h1>
-
-<h2>Related films</h2>
-<!--
-<ul>
-	{% for film in films %}
-	<li><a href="{% url 'films:detail' film.id %}">{{ film.title|capfirst }}</a></li>
-	{% endfor %}
-</ul>
--->
+<div class="">
+    <a class="btn btn-primary" role="button" href="{% url 'genres:update' genre.id %}">Edit</a>
+    <a class="btn btn-danger" role="button" href="{% url 'genres:delete' genre.id %}">Remove</a>
+  </div>
 {% for film in films %}
 <div class="card m-3">
   <div class="card-body">

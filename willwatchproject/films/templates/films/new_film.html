@@ -21,6 +21,10 @@
 	<br>
 	<label for="description">Description: </label><textarea id="description" name="description" maxlength="500"></textarea>
 	<br>
-	<input type="submit">
+
+	<div>
+	<button type="submit" class="btn btn-primary">Create film</button>
+	<a role="button" class="btn btn-secondary" href="{% url 'films:list' %}">Cancel</a>
+	</div>
 </form>
 {% endblock %}

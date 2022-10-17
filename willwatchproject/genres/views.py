@@ -40,6 +40,7 @@ class GenreUpdateView(UpdateView):
 	model = Genre
 	fields = ['genre_name']
 	template_name = 'genres/update_genre.html'
+	success_url = reverse_lazy('genres:list')
 
 
 class GenreDeleteView(DeleteView):

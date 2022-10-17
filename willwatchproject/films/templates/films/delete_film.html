@@ -10,7 +10,7 @@
 <p>Do you want to remove <span class="fw-bold">"{{ film.title|capfirst }}"</span> from your list?</p>
 <form method="post">
 	{% csrf_token %}
-	<button type="submit">Remove</button>
-	<a href="{% url 'films:list' %}">Cancel</a>
+	<button type="submit" class="btn btn-danger">Remove</button>
+	<a role="button" class="btn btn-secondary" href="{% url 'films:list' %}">Cancel</a>
 </form>
 {% endblock %}
