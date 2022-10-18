@@ -8,23 +8,46 @@
 {% block content %}
 <h1>New Film</h1>
 
+<div class="card">
+
 <form action="" method="post" accept-charset="utf-8">
 	{% csrf_token %}
-	<label for="title">Title: </label><input id="title" type="text" name="title" maxlength="100" minlength="3" required>
-	<br>
-	<label>Genre: </label>
-		{% for genre in genres_list %}
-			<input type="checkbox" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}"><label for="genre{{ forloop.counter }}">{{ genre.genre_name|capfirst }}</label>
-		{% endfor %}
-	<br>
-	<label for="year">Year: </label><input id="year" type="number" name="year" min="1900" max="2050">
-	<br>
-	<label for="description">Description: </label><textarea id="description" name="description" maxlength="500"></textarea>
-	<br>
 
-	<div>
+<div class="card-body">
+
+	<div class="mb-3">
+		<label for="title" class="form-label">Title: </label>
+		<input id="title" type="text" class="form-control" name="title" maxlength="100" minlength="3" required>
+	</div>
+
+	<div class="mb-3">
+		<label class="form-label">Genre: </label>
+			{% for genre in genres_list %}
+		<div class="form-check">
+				<input type="checkbox" class="form-check-input" name="genre" value="{{ genre.id }}" id="genre{{ forloop.counter }}">
+				<label class="form-check-label" for="genre{{ forloop.counter }}">{{ genre.genre_name|capfirst }}</label>
+		</div>
+			{% endfor %}
+	</div>
+
+	<div class="mb-3">
+		<label for="year" class="form-label">Year: </label>
+		<input id="year" type="number" class="form-control" name="year" min="1900" max="2050">
+	</div>
+
+	<div class="mb-3">
+		<label for="description" class="form-label">Description: </label>
+		<textarea id="description" class="form-control" rows="3" name="description" maxlength="500"></textarea>
+	</div>
+
+</div>
+
+<div class="card-footer">
 	<button type="submit" class="btn btn-primary">Create film</button>
 	<a role="button" class="btn btn-secondary" href="{% url 'films:list' %}">Cancel</a>
-	</div>
+</div>
+
 </form>
+
+</div>
 {% endblock %}
