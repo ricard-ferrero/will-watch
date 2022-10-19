@@ -16,22 +16,20 @@
 		</div>
 
 		<div class="card-footer">
-			<button type="submit" name="Create" class="btn btn-primary">Create genre</button>
+			<button name="Create" class="btn btn-primary">Create genre</button>
 			<a role="button" class="btn btn-secondary" href="{% url 'genres:list' %}">Cancel</a>
 		</div>
 	</form>
 </div>
 
 
-
 <script type="text/javascript">
-	const btn = document.querySelector('form button')
-	const input = document.getElementById('id_genre_name')
-	
-	btn.addEventListener('click', e=>{
-		e.preventDefault()
+	document.querySelector('form').addEventListener('submit', e=>{
+		e.preventDefault();
+		const input = document.querySelector('#id_genre_name')
 		input.value = input.value.toLowerCase()
-		document.querySelector('form').submit()
+		e.target.submit();
 	})
 </script>
+
 {% endblock %}
