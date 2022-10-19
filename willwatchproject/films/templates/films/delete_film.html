@@ -7,10 +7,17 @@
 
 {% block content %}
 <h1>Are you sure?</h1>
-<p>Do you want to remove <span class="fw-bold">"{{ film.title|capfirst }}"</span> from your list?</p>
-<form method="post">
-	{% csrf_token %}
-	<button type="submit" class="btn btn-danger">Remove</button>
-	<a role="button" class="btn btn-secondary" href="{% url 'films:list' %}">Cancel</a>
-</form>
+
+<div class="card">
+	<div class="card-body">
+		<p class="card-title">Do you want to remove <span class="fw-bold">"{{ film.title|capfirst }}"</span> from your list?</p>
+	</div>
+	<div class="card-footer">
+		<form method="post">
+			{% csrf_token %}
+			<button type="submit" class="btn btn-danger">Remove</button>
+			<a role="button" class="btn btn-secondary" href="{% url 'films:list' %}">Cancel</a>
+		</form>
+	</div>
+</div>
 {% endblock %}
