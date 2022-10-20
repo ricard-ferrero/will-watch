@@ -1,8 +1,9 @@
 from django.urls import path
-from django.views.generic import TemplateView
+from . import views
+#from django.views.generic import TemplateView
 
 app_name = 'frontend'
 urlpatterns = [
-	path('', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
+	path('', views.index, name='index'),
 
 ]

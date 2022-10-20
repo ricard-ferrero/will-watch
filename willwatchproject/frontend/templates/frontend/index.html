@@ -6,5 +6,31 @@
 {% block aria-home %}aria-current="page"{% endblock %}
 
 {% block content %}
-<h1>Home</h1>
+<div class="content">
+<h1>Will Watch</h1>
+
+<p>Do you have too many films to watch? Then keep a list save!</p>
+
+<p>Will Watch is an app to list your films you wanna watch and when the day comes to choose one from that.</p>
+
+<p>You can sort them by genre or choose one at random.</p>
+</div>
+
+<div class="card">
+<div class="card-body">
+	<form>
+	<p class="card-title h3">Creation</p>
+	{{ form_creation }}
+	<input type="submit">
+	</form>
+</div>
+<hr>
+<div class="card-body">
+	<p class="card-title h3">Login</p>
+	<form>
+	{{ form_login }}
+	<input type="submit">
+	</form>
+</div>
+</div>
 {% endblock %}
