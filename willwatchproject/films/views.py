@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -12,6 +14,7 @@ from random import choice
 from datetime import date
 
 
+@login_required
 def my_films(request, film_id=0):
 	if film_id > 0:
 		if request.method == 'POST':
@@ -68,6 +71,8 @@ def post_detail_film(request, film_id):
 		return HttpResponseRedirect(reverse('films:list'))
 """
 
+
+@login_required
 def random_film(request):
 	film_list = Film.objects.filter(watched=False)
 	if film_list:
@@ -77,6 +82,7 @@ def random_film(request):
 		return HttpResponseRedirect(reverse('films:list'))
 
 
+@login_required
 def new_film(request):
 	if request.method == 'GET':
 		genres_list = Genre.objects.order_by('genre_name')
@@ -122,6 +128,7 @@ def edit_film(request):
 	return HttpResponseRedirect(reverse('films:detail', args=[film.id]))
 	
 
+@login_required
 def delete_film(request, pk):
 	film = get_object_or_404(Film, pk=pk)
 	if request.method == 'GET':
@@ -130,6 +137,8 @@ def delete_film(request, pk):
 		film.delete()
 		return HttpResponseRedirect(reverse('films:list'))
 
+
+@login_required
 def update_film(request, pk):
 	if request.method == 'GET':
 		film = get_object_or_404(Film, pk=pk)
@@ -139,6 +148,8 @@ def update_film(request, pk):
 	if request.method == 'POST':
 		return edit_film(request)
 
+
+@login_required
 def whatched_film(request, pk):
 	film = get_object_or_404(Film, pk=pk)
 	film.watched = not film.watched

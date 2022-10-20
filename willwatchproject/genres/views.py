@@ -1,4 +1,5 @@
-#from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.urls import reverse_lazy
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,13 +9,13 @@ from django.views.generic.detail import DetailView
 from .models import Genre
 
 
-class GenreCreateView(CreateView):
+class GenreCreateView(LoginRequiredMixin, CreateView):
 	model = Genre
 	fields = ['genre_name']
 	template_name = 'genres/new_genre.html'
 
 
-class GenreListView(ListView):
+class GenreListView(LoginRequiredMixin, ListView):
 	model = Genre
 	template_name = 'genres/list_genres.html'
 	context_object_name = 'genres'
@@ -23,7 +24,7 @@ class GenreListView(ListView):
 		return Genre.objects.order_by('genre_name')
 
 
-class GenreDetailView(DetailView):
+class GenreDetailView(LoginRequiredMixin, DetailView):
 	model = Genre
 	template_name = 'genres/detail_genre.html'
 
@@ -36,14 +37,14 @@ class GenreDetailView(DetailView):
 		return context
 
 
-class GenreUpdateView(UpdateView):
+class GenreUpdateView(LoginRequiredMixin, UpdateView):
 	model = Genre
 	fields = ['genre_name']
 	template_name = 'genres/update_genre.html'
 	success_url = reverse_lazy('genres:list')
 
 
-class GenreDeleteView(DeleteView):
+class GenreDeleteView(LoginRequiredMixin, DeleteView):
 	model = Genre
 	template_name = 'genres/delete_genre.html'
 	success_url = reverse_lazy('genres:list')
