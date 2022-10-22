@@ -16,9 +16,10 @@
 <p>You can sort them by genre or choose one at random.</p>
 </div>
 
+<h1>{{ message }}</h1>
 
 
-<form>	
+<form action="{% url 'frontend:signup' %}" method="post">	
 	<p class="h3">New user</p>
 	
 	{% csrf_token %}
@@ -38,7 +39,7 @@
 		<input class="form-control" type="password" name="password2" autocomplete="new-password" required id="id_password2">
 	</div>
 
-	<button type="submit" class="btn btn-large btn-primary">Sign-in</button>
+	<button type="submit" class="btn btn-large btn-primary">Sign up</button>
 
 	
 </form>
