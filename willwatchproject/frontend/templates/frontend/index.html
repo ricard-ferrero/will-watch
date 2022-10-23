@@ -16,7 +16,9 @@
 <p>You can sort them by genre or choose one at random.</p>
 </div>
 
-<h1>{{ message }}</h1>
+{% if message %}
+<p class="alert alert-{{ type_message }}">{{ message }}</p>
+{% endif %}
 
 
 <form action="{% url 'frontend:signup' %}" method="post">	

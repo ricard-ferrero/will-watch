@@ -14,8 +14,11 @@ def signup(request):
 
 	# POST from signup form
 	if request.POST['password1'] == request.POST['password2']:
-		user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
-		user.save()
-		return render(request, 'frontend/index.html', {'message':'OK'})
+		try:
+			user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
+			user.save()
+			return render(request, 'frontend/index.html', {'message':'OK', 'type_message':'success'})
+		except:
+			return render(request, 'frontend/index.html', {'message':'User allready exists', 'type_message':'danger'})
 
-	return render(request, 'frontend/index.html', {'message':'Passwords dont match'})
+	return render(request, 'frontend/index.html', {'message':'Passwords do not match', 'type_message':'danger'})
