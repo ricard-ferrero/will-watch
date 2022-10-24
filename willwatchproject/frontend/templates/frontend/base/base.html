@@ -49,6 +49,7 @@
 		        <li class="nav-item">
 		          <a class="nav-link {% block active-home %}{% endblock %}" {% block aria-home %}{% endblock %} href="{% url 'frontend:index' %}">Home</a>
 		        </li>
+		        {% if user.is_authenticated %}
 		        <li class="nav-item">
 		          <a class="nav-link {% block active-films %}{% endblock %}" {% block aria-films %}{% endblock %} href="{% url 'films:list' %}">Films</a>
 		        </li>
@@ -58,6 +59,25 @@
 		        <li class="nav-item">
 		          <a class="nav-link" href="{% url 'films:random' %}">Random</a>
 		        </li>
+		        {% else %}
+		        <li class="nav-item {% block active-signup %}{% endblock %}" {% block aria-signup %}{% endblock %}>
+		          <a class="nav-link" href="{% url 'frontend:signup' %}">Sign up!</a>
+		        </li>
+		        {% endif %}
+		      </ul>
+
+		      {% if user.is_authenticated %}
+		      <div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+				    USER {{ user.user_name }}
+				  </button>
+				  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end">
+				    <li><a class="dropdown-item" href="#">Edit</a></li>
+				    <li><a class="dropdown-item" href="{% url 'frontend:signout' %}">Sign out</a></li>
+				  </ul>
+				</div>
+		      {% endif %}
+
 		    </div>
 		  </div>
 		</nav>

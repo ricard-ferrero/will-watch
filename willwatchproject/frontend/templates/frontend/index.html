@@ -15,49 +15,4 @@
 
 <p>You can sort them by genre or choose one at random.</p>
 </div>
-
-{% if message %}
-<p class="alert alert-{{ type_message }}">{{ message }}</p>
-{% endif %}
-
-
-<form action="{% url 'frontend:signup' %}" method="post">	
-	<p class="h3">New user</p>
-	
-	{% csrf_token %}
-
-	<div>	
-		<label for="id_username">Username:</label>
-		<input class="form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
-	</div>
-
-	<div>
-		<label for="id_password1">Password:</label>
-		<input class="form-control" type="password" name="password1" autocomplete="new-password" required id="id_password1">
-	</div>
-
-	<div>
-		<label for="id_password2">Password confirmation:</label>
-		<input class="form-control" type="password" name="password2" autocomplete="new-password" required id="id_password2">
-	</div>
-
-	<button type="submit" class="btn btn-large btn-primary">Sign up</button>
-
-	
-</form>
-
-<!--
-<form>
-	<div class="card-body">
-	<p class="card-title h3">Login</p>
-	{{ form_login }}
-	</div>
-
-	<div class="card-footer">
-	<input type="submit">
-	</div>
-</form>
-</div>
--->
-
 {% endblock %}

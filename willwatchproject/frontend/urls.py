@@ -5,5 +5,6 @@ from . import views
 app_name = 'frontend'
 urlpatterns = [
 	path('', views.index, name='index'),
-	path('signup/', views.signup, name='signup')
+	path('signup/', views.signup, name='signup'),
+	path('signout/', views.signout, name='signout'),
 ]
