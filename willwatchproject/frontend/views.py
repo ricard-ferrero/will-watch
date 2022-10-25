@@ -1,18 +1,21 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 
 from django.db import IntegrityError
 
-# Create your views here.
-def index(request):
-	return render(request, 'frontend/index.html')
 
+def index(request):
+	return render(request, 'frontend/index.html', {'form': AuthenticationForm})
+
+
+# NEW user
 def signup(request):
 	# not POST
-	if request.method == 'GET':
+	if request.method != 'POST':
 		return render(request, 'frontend/signup.html')
 
 	# POST from signup form
@@ -29,6 +32,15 @@ def signup(request):
 
 	return render(request, 'frontend/signup.html', {'message':'Passwords do not match', 'type_message':'danger'})
 
+
+# CLOSE session
 def signout(request):
 	logout(request)
 	return redirect('frontend:index')
+
+
+# OPEN session
+def signin(request):
+	if request.method != 'POST':
+		return redirect('frontend:index')
+	
