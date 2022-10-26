@@ -6,33 +6,49 @@
 {% block aria-home %}aria-current="page"{% endblock %}
 
 {% block content %}
-<div>
-<h1>Will Watch</h1>
 
-<p>Do you have too many films to watch? Then keep a list save!</p>
 
-<p>Will Watch is an app to list your films you wanna watch and when the day comes to choose one from that.</p>
+{% if user.is_authenticated %}
 
-<p>You can sort them by genre or choose one at random.</p>
-</div>
+{% else %}
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+<div class="row align-items-center g-lg-5 py-5">
 
-<div>
-<form action="{% url 'frontend:signin' %}" method="post">
+	<div class="col-lg-7 text-center text-lg-start">
+		<h1 class="display-4 fw-bold lh-1 mb-3">Will Watch</h1>
 
-	{% csrf_token %}
-	
-	<div>
-	<label for="id_username">Username:</label>
-	<input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+		<p class="col-lg-10 fs-4">Do you have too many films to watch? Then keep a list save!</p>
+
+		<p class="col-lg-10 fs-6"><strong>Will Watch</strong> is an app to list your films you wanna watch and when the day comes to choose one from that.</p>
+
+		<p class="col-lg-10 fs-6">You can sort them by genre or choose one at random.</p>
 	</div>
 
-	<div>
-	<label for="id_password">Password:</label>
-	<input type="password" name="password" autocomplete="current-password" required id="id_password">
+
+	<div class="col-md-10 mx-auto col-lg-5">
+		{% if message %}
+		<p class="alert alert-{{ type_message }}">{{ message }}</p>
+		{% endif %}
+		<form action="{% url 'frontend:signin' %}" method="post" class="p-4 p-md-5 border rounded-3" style="background-color: white;">
+			{% csrf_token %}
+
+			
+			<div class="mb-3">
+			<label for="id_username">Username:</label>
+			<input class="form-control" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+			</div>
+
+			<div class="mb-3">
+			<label for="id_password">Password:</label>
+			<input class="form-control" type="password" name="password" autocomplete="current-password" required id="id_password">
+			</div>
+
+			<button type="submit" class="w-100 btn btn-large btn-primary">Sign in</button>
+
+		</form>
 	</div>
 
-	<button type="submit" class="btn btn-large btn-primary">Sign in</button>
-
-</form>
 </div>
+</div>
+{% endif %}
 {% endblock %}
