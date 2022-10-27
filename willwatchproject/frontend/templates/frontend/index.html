@@ -9,7 +9,14 @@
 
 
 {% if user.is_authenticated %}
-
+<div class="px-4 py-5 my-5 text-center">
+	<h1 class="display-5 fw-bold">Welcome {{ user.username|capfirst }}</h1>
+	<div class="col-lg-6 mx-auto">
+		<p class="lead mb-4">Create a list of your <strong>favorite movie genres</strong> to keep everything well organized. Then add all the films you want to watch in the future.
+		<br/>
+		<em>Do you want to see a movie but you don't know which one?</em> Use the <strong>random</strong> option!</p>
+	</div>
+</div>
 {% else %}
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
 <div class="row align-items-center g-lg-5 py-5">
