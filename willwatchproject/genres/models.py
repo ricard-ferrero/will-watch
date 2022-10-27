@@ -1,12 +1,13 @@
 from django.db import models
 from films.models import Film
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
 	genre_name = models.CharField(max_length=50, unique=True) # obl
-	#logo = models.ImageField(upload_to=None, max_length=100, height_field=None, width_field=None, null=True, blank=True) # non-obl
 	films = models.ManyToManyField(Film)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)

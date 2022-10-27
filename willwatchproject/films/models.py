@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Film(models.Model):
@@ -6,11 +7,7 @@ class Film(models.Model):
 	year = models.IntegerField(null=True, blank=True) # non-obl
 	description = models.CharField(max_length=500, null=True, blank=True) # non-obl
 	watched = models.BooleanField(default=False) # obl
-	"""
-	# Choose one: Image or URL
-	image = models.ImageField(upload_to=None, max_length=100, height_field=None, width_field=None, null=True, blank=True) # non-obl
-	image = models.URLField(max_length=200, null=True, blank=True) #non-obl
-	"""
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
