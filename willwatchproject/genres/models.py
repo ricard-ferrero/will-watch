@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
-	genre_name = models.CharField(max_length=50, unique=True) # obl
+	genre_name = models.CharField(max_length=50) # obl
 	films = models.ManyToManyField(Film)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
