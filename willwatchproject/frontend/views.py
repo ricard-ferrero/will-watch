@@ -7,6 +7,8 @@ from django.contrib.auth import login, logout, authenticate
 
 from django.db import IntegrityError
 
+from genres.models import Genre
+
 
 def index(request):
 	return render(request, 'frontend/index.html')
@@ -23,6 +25,11 @@ def signup(request):
 		try:
 			user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
 			user.save()
+
+			genres = ['action', 'comedy', 'drama', 'fantasy', 'horror', 'mystery', 'romance', 'science fiction', 'thriller', 'western']
+			for g in genres:
+				new_genre = Genre(genre_name=g, user_id=user.id)
+				new_genre.save()
 			login(request, user)
 			return render(request, 'frontend/index.html')
 		except IntegrityError:
