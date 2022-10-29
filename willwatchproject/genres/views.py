@@ -24,7 +24,7 @@ class GenreListView(LoginRequiredMixin, ListView):
 	context_object_name = 'genres'
 
 	def get_queryset(self):
-		return Genre.objects.order_by('genre_name')
+		return Genre.objects.filter(user=self.request.user).order_by('genre_name')
 
 
 class GenreDetailView(LoginRequiredMixin, DetailView):
