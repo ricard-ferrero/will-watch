@@ -17,8 +17,6 @@ from datetime import date
 @login_required
 def my_films(request, film_id=0):
 	if film_id > 0:
-		if request.method == 'POST':
-			return post_detail_film(request, film_id)
 		return FilmDetailView.as_view()(request, pk=film_id)
 	else:
 		return FilmsListView.as_view()(request)
@@ -30,7 +28,7 @@ class FilmsListView(ListView):
 	model = Film
 
 	def get_queryset(self):
-		return Film.objects.order_by('title').filter(watched=False)
+		return Film.objects.filter(user=self.request.user).order_by('title').filter(watched=False)
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -52,24 +50,6 @@ class FilmDetailView(DetailView):
 			'genres_list': Genre.objects.order_by('genre_name'),
 			})
 		return context
-
-
-"""
-The rest of the code will be updated to Class Based Views,
-then I need to research more about that.
-For this moment I prefere to keep it functional and
-work on the rest of the project :)
-"""
-
-"""
-def post_detail_film(request, film_id):
-	if request.POST['call-to'] == 'delete':
-		return delete_film(request)
-	elif request.POST['call-to'] == 'edit':
-		return edit_film(request)
-	else:
-		return HttpResponseRedirect(reverse('films:list'))
-"""
 
 
 @login_required
@@ -97,6 +77,7 @@ def create_film(request):
 		film.year = request.POST['year']
 	if request.POST['description']:
 		film.description = request.POST['description']
+	film.user_id = request.user.id
 	film.save()
 	genres_list = request.POST.getlist('genre')
 	for i in genres_list:
