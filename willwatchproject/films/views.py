@@ -33,8 +33,8 @@ class FilmsListView(ListView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context.update({
-			'watched_film_list': Film.objects.order_by('title').filter(watched=True),
-			'genres_list': Genre.objects.order_by('genre_name')
+			'watched_film_list': Film.objects.filter(user=self.request.user).order_by('title').filter(watched=True),
+			'genres_list': Genre.objects.filter(user=self.request.user).order_by('genre_name')
 			})
 		return context
 
@@ -47,7 +47,7 @@ class FilmDetailView(DetailView):
 		context = super().get_context_data(**kwargs)
 		context.update({
 			'genres': self.object.genre_set.all(),
-			'genres_list': Genre.objects.order_by('genre_name'),
+			'genres_list': Genre.objects.filter(user=self.request.user).order_by('genre_name'),
 			})
 		return context
 
@@ -65,7 +65,7 @@ def random_film(request):
 @login_required
 def new_film(request):
 	if request.method == 'GET':
-		genres_list = Genre.objects.order_by('genre_name')
+		genres_list = Genre.objects.filter(user=request.user).order_by('genre_name')
 		return render(request, 'films/new_film.html', {'genres_list': genres_list})
 	elif request.method == 'POST':
 		return create_film(request)
