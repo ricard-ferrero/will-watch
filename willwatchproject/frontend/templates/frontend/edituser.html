@@ -1,0 +1,26 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}Edit user{% endblock %}
+
+{% block content %}
+<div class="col-md-10 mx-auto col-lg-5">
+
+<h1>{{ user.username|capfirst }}</h1>
+
+
+{% if message %}
+<p class="alert alert-{{ type_message }}">{{ message }}</p>
+{% endif %}
+
+
+<div class="p-4 p-md-5 border rounded-3">	
+	{% csrf_token %}
+
+	<a class="w-100 btn btn-large btn-primary mb-5" href="{% url 'frontend:change_username' %}">Change username</a>
+	<a class="w-100 btn btn-large btn-dark" href="{% url 'frontend:change_password' %}">Change password</a>
+
+	
+</div>
+
+</div>
+{% endblock %}

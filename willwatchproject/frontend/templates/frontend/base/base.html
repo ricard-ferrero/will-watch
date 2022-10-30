@@ -72,7 +72,7 @@
 				    {{ user.username|capfirst }}
 				  </button>
 				  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end">
-				    <li><a class="dropdown-item" href="#">Edit</a></li>
+				    <li><a class="dropdown-item" href="{% url 'frontend:edit_user' %}">Edit</a></li>
 				    <li><a class="dropdown-item" href="{% url 'frontend:signout' %}">Sign out</a></li>
 				  </ul>
 				</div>

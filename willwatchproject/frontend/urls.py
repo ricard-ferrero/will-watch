@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-#from django.views.generic import TemplateView
+
 
 app_name = 'frontend'
 urlpatterns = [
@@ -8,4 +8,7 @@ urlpatterns = [
 	path('signup/', views.signup, name='signup'),
 	path('signout/', views.signout, name='signout'),
 	path('signin/', views.signin, name='signin'),
+	path('edituser/', views.edit_user, name='edit_user'),
+	path('username/', views.change_username, name='change_username'),
+	path('password/', views.change_password, name='change_password'),
 ]

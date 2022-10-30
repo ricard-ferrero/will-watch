@@ -1,0 +1,35 @@
+{% extends 'frontend/base/base.html' %}
+
+{% block title %}Change username{% endblock %}
+
+{% block content %}
+<div class="col-md-10 mx-auto col-lg-5">
+
+<h1>Change username</h1>
+
+
+{% if message %}
+<p class="alert alert-{{ type_message }}">{{ message }}</p>
+{% endif %}
+
+
+<form action="{% url 'frontend:change_username' %}" method="post" class="p-4 p-md-5 border rounded-3">	
+	{% csrf_token %}
+
+	<div class="mb-3">	
+		<label for="id_username">New username:</label>
+		<input class="form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
+	</div>
+
+	<div class="mb-3">
+		<label for="id_password1">Password:</label>
+		<input class="form-control" type="password" name="password" autocomplete="new-password" required id="id_password">
+	</div>
+
+	<button type="submit" class="w-100 btn btn-large btn-primary" name="action" value="username">Save</button>
+
+	
+</form>
+
+</div>
+{% endblock %}

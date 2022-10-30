@@ -59,4 +59,35 @@ def signin(request):
 	login(request, user)
 	return redirect('frontend:index')
 
-	
+
+def edit_user(request):
+	if request.method != 'POST':
+		return render(request, 'frontend/edituser.html', {'message': '', 'type_message':''})
+
+
+def change_username(request):
+	if request.method != 'POST':
+		return render(request, 'frontend/username.html')
+
+	if request.user.check_password(request.POST['password']):
+		request.user.username = request.POST['username']
+		request.user.save()
+		return redirect('frontend:edit_user')
+	else:
+		return render(request, 'frontend/username.html', {'message':'Password is not correct', 'type_message':'danger'})
+
+
+def change_password(request):
+	#return render(request, 'frontend/password.html')
+	if request.method != 'POST':
+		return render(request, 'frontend/password.html')
+
+	if request.user.check_password(request.POST['password']):
+		if request.POST['newpassword1'] == request.POST['newpassword2']:
+			request.user.set_password(request.POST['newpassword1'])
+			request.user.save()
+			request.user.authenticate()
+			return render(request, 'frontend/password.html', {'message':'OK', 'type_message':'success'})
+		return render(request, 'frontend/password.html', {'message':'New passwords does not match', 'type_message':'danger'})
+	else:
+		return render(request, 'frontend/password.html', {'message':'Password is not correct', 'type_message':'danger'})
