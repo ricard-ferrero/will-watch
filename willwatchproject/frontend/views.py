@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, logout, authenticate
+
 
 from django.db import IntegrityError
 
@@ -61,8 +62,7 @@ def signin(request):
 
 
 def edit_user(request):
-	if request.method != 'POST':
-		return render(request, 'frontend/edituser.html', {'message': '', 'type_message':''})
+	return render(request, 'frontend/edituser.html', {'message': '', 'type_message':''})
 
 
 def change_username(request):
@@ -86,7 +86,7 @@ def change_password(request):
 		if request.POST['newpassword1'] == request.POST['newpassword2']:
 			request.user.set_password(request.POST['newpassword1'])
 			request.user.save()
-			request.user.authenticate()
+			update_session_auth_hash(request, request.user)
 			return render(request, 'frontend/password.html', {'message':'OK', 'type_message':'success'})
 		return render(request, 'frontend/password.html', {'message':'New passwords does not match', 'type_message':'danger'})
 	else:

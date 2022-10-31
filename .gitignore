@@ -1,4 +1,5 @@
 venv/
 willwatchproject/db.sqlite3
 willwatchproject/*/__pycache__/
+willwatchproject/*/*/__pycache__/
 willwatchproject/*/migrations/
