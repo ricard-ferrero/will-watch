@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -61,10 +62,16 @@ def signin(request):
 	return redirect('frontend:index')
 
 
-def edit_user(request):
-	return render(request, 'frontend/edituser.html', {'message': '', 'type_message':''})
+@login_required
+def edit_user(request, msg=None):
+	if msg == 'name':
+		return render(request, 'frontend/edituser.html', {'message': 'You changed the username', 'type_message':'success'})
+	if msg == 'psw':
+		return render(request, 'frontend/edituser.html', {'message': 'You changed the password', 'type_message':'success'})
+	return render(request, 'frontend/edituser.html')
 
 
+@login_required
 def change_username(request):
 	if request.method != 'POST':
 		return render(request, 'frontend/username.html')
@@ -72,11 +79,12 @@ def change_username(request):
 	if request.user.check_password(request.POST['password']):
 		request.user.username = request.POST['username']
 		request.user.save()
-		return redirect('frontend:edit_user')
+		return redirect('frontend:edit_user_msg', msg='name')
 	else:
 		return render(request, 'frontend/username.html', {'message':'Password is not correct', 'type_message':'danger'})
 
 
+@login_required
 def change_password(request):
 	#return render(request, 'frontend/password.html')
 	if request.method != 'POST':
@@ -87,7 +95,7 @@ def change_password(request):
 			request.user.set_password(request.POST['newpassword1'])
 			request.user.save()
 			update_session_auth_hash(request, request.user)
-			return render(request, 'frontend/password.html', {'message':'OK', 'type_message':'success'})
+			return redirect('frontend:edit_user_msg', msg='psw')
 		return render(request, 'frontend/password.html', {'message':'New passwords does not match', 'type_message':'danger'})
 	else:
 		return render(request, 'frontend/password.html', {'message':'Password is not correct', 'type_message':'danger'})
