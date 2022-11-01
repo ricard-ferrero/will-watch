@@ -123,7 +123,7 @@ def delete_film(request, pk):
 def update_film(request, pk):
 	if request.method == 'GET':
 		film = get_object_or_404(Film, pk=pk)
-		genres_list = Genre.objects.order_by('genre_name')
+		genres_list = Genre.objects.filter(user=request.user).order_by('genre_name')
 		genres_film = film.genre_set.all()
 		return render(request, 'films/update_film.html', {'film': film, 'genres_list': genres_list})
 	if request.method == 'POST':
